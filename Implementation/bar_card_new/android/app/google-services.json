@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "985521845348",
+    "firebase_url": "https://barcard-53fbc.firebaseio.com",
+    "project_id": "barcard-53fbc",
+    "storage_bucket": "barcard-53fbc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985521845348:android:1d7ab40cee49452fd95b71",
+        "android_client_info": {
+          "package_name": "com.example.bar_card_new"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "985521845348-h7p5kq291m6mbaps5rqks34llo8ohtda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzpfPHLcT8A5lrmQ_1wIqR8nbJfidgsj4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "985521845348-h7p5kq291m6mbaps5rqks34llo8ohtda.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
