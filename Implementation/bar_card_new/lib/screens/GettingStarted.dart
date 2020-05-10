@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'authenticate/authenticate.dart';
+import 'authenticate/Authenticate.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -41,21 +41,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         PageViewModel(
           title: "Welcome to BarCard!",
           body:
-          "We provide you with E-Business card with your contact details, so you can simply share it with a quick scan.",
+              "We provide you with E-Business card with your contact details, so you can simply share it with a quick scan.",
           image: _buildImage('1'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Learn as you go",
           body:
-          "Download the Stockpile app and master the market with our mini-lesson.",
+              "Download the Stockpile app and master the market with our mini-lesson.",
           image: _buildImage('1'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Kids and teens",
           body:
-          "Kids and teens can track their stocks 24/7 and place trades that you approve.",
+              "Kids and teens can track their stocks 24/7 and place trades that you approve.",
           image: _buildImage('1'),
           decoration: pageDecoration,
         ),

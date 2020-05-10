@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:bar_card_new/b_card.dart';
+import 'package:bar_card_new/AppTheme.dart';
+import 'package:bar_card_new/BCard.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:bar_card_new/screens/services/database.dart';
+import 'package:bar_card_new/screens/services/Database.dart';
 import 'package:provider/provider.dart';
-import 'package:bar_card_new/models/user.dart';
+import 'package:bar_card_new/models/User.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:geo_firestore/geo_firestore.dart';
 import 'package:location/location.dart';
-//import 'package:geopoint/geopoint.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-
 
 class CardTab extends StatefulWidget {
   @override
   _CardTabState createState() => _CardTabState();
 }
 
-class _CardTabState extends State<CardTab>
-    with AutomaticKeepAliveClientMixin {
+class _CardTabState extends State<CardTab> with AutomaticKeepAliveClientMixin {
   Color currentBGColor = Color(0xff233c67);
 
   void changeBGColor(Color color) => setState(() => currentBGColor = color);
@@ -30,7 +27,6 @@ class _CardTabState extends State<CardTab>
   bool publicSwitchValue = false;
 
   void changePublicSwitch(bool b) => setState(() => publicSwitchValue = b);
-
 
   @override
   void initState() {
@@ -57,7 +53,7 @@ class _CardTabState extends State<CardTab>
         changeFontColor(Color(x));
       });
 
-      db.getUserPublic().then((value){
+      db.getUserPublic().then((value) {
         changePublicSwitch(value);
       });
     });
@@ -71,11 +67,13 @@ class _CardTabState extends State<CardTab>
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Do you want to make your card public and set your current location as the cards location?"),
+          title: Text(
+              "Do you want to make your card public and set your current location as the cards location?"),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text("This will make your card visible to users in your vicinity!")
+                Text(
+                    "This will make your card visible to users in your vicinity!")
               ],
             ),
           ),
@@ -116,7 +114,7 @@ class _CardTabState extends State<CardTab>
               ),
               Center(
                   child: Icon(Icons.check_circle,
-                      color: Colors.green, size: 50.0)),
+                      color: AppTheme.nearlyGreen, size: 50.0)),
             ]),
           );
         });
@@ -147,6 +145,7 @@ class _CardTabState extends State<CardTab>
       height: MediaQuery.of(context).size.height,
       width: double.infinity,
       child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         //controller: scrollController,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,37 +162,32 @@ class _CardTabState extends State<CardTab>
                     style: TextStyle(
                         fontWeight: FontWeight.w900,
                         fontSize: 24,
-                        color: Colors.black),
+                        color: AppTheme.darkText),
                   ),
                 ],
               ),
             ),
-
             BCard(
               uid: user.uid,
               margin: 25,
               bgColor: currentBGColor,
               fontColor: currentFontColor,
             ),
-
             SizedBox(
               height: 16,
             ),
-
             Center(
               child: Text(
                 "Card Style",
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
-                    color: Colors.black),
+                    color: AppTheme.darkText),
               ),
             ),
-
             SizedBox(
               height: 16,
             ),
-
             GestureDetector(
               onTap: () {
                 showDialog(
@@ -224,13 +218,13 @@ class _CardTabState extends State<CardTab>
               },
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppTheme.white,
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.grey[100],
-                          spreadRadius: 10.0,
-                          blurRadius: 4.5)
+                          color: AppTheme.black.withOpacity(0.1),
+                          offset: const Offset(1.1, 4.0),
+                          blurRadius: 8.0)
                     ]),
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                 margin: EdgeInsets.symmetric(horizontal: 32),
@@ -241,7 +235,7 @@ class _CardTabState extends State<CardTab>
                       children: <Widget>[
                         Icon(
                           Icons.format_paint,
-                          color: Colors.lightBlue[900],
+                          color: AppTheme.darkBlue,
                         ),
                         SizedBox(
                           width: 16,
@@ -251,7 +245,7 @@ class _CardTabState extends State<CardTab>
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 18,
-                              color: Colors.grey[700]),
+                              color: AppTheme.lightText),
                         )
                       ],
                     ),
@@ -269,7 +263,6 @@ class _CardTabState extends State<CardTab>
             SizedBox(
               height: 16,
             ),
-
             GestureDetector(
               onTap: () {
                 showDialog(
@@ -300,13 +293,13 @@ class _CardTabState extends State<CardTab>
               },
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppTheme.white,
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.grey[100],
-                          spreadRadius: 10.0,
-                          blurRadius: 4.5)
+                          color: AppTheme.black.withOpacity(0.1),
+                          offset: const Offset(1.1, 4.0),
+                          blurRadius: 8.0)
                     ]),
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                 margin: EdgeInsets.symmetric(horizontal: 32),
@@ -317,7 +310,7 @@ class _CardTabState extends State<CardTab>
                       children: <Widget>[
                         Icon(
                           Icons.text_fields,
-                          color: Colors.lightBlue[900],
+                          color: AppTheme.darkBlue,
                         ),
                         SizedBox(
                           width: 16,
@@ -327,7 +320,7 @@ class _CardTabState extends State<CardTab>
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 18,
-                              color: Colors.grey[700]),
+                              color: AppTheme.lightText),
                         )
                       ],
                     ),
@@ -342,20 +335,18 @@ class _CardTabState extends State<CardTab>
                 ),
               ),
             ),
-
             SizedBox(
               height: 15,
             ),
-
             Container(
               decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppTheme.white,
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.grey[100],
-                        spreadRadius: 10.0,
-                        blurRadius: 4.5)
+                        color: AppTheme.black.withOpacity(0.1),
+                        offset: const Offset(1.1, 4.0),
+                        blurRadius: 8.0)
                   ]),
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               margin: EdgeInsets.symmetric(horizontal: 32),
@@ -366,7 +357,7 @@ class _CardTabState extends State<CardTab>
                     children: <Widget>[
                       Icon(
                         Icons.credit_card,
-                        color: Colors.lightBlue[900],
+                        color: AppTheme.darkBlue,
                       ),
                       SizedBox(
                         width: 16,
@@ -376,7 +367,7 @@ class _CardTabState extends State<CardTab>
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 18,
-                            color: Colors.grey[700]),
+                            color: AppTheme.lightText),
                       )
                     ],
                   ),
@@ -385,7 +376,7 @@ class _CardTabState extends State<CardTab>
                     activeColor: Color.fromRGBO(50, 172, 121, 1),
                     onChanged: (_) {
                       changePublicSwitch(!publicSwitchValue);
-                      if(publicSwitchValue){
+                      if (publicSwitchValue) {
                         showPubDial();
                       }
                     },
@@ -396,7 +387,6 @@ class _CardTabState extends State<CardTab>
             SizedBox(
               height: 16,
             ),
-
             Center(
               child: ButtonTheme(
                 minWidth: 200,
@@ -404,67 +394,25 @@ class _CardTabState extends State<CardTab>
                 child: RaisedButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(10.0)),
-                  color: Colors.green,
+                  color: AppTheme.nearlyGreen,
                   onPressed: () {
                     var db = DatabaseService(uid: user.uid);
-                    db.setUserPref(
-                        currentBGColor.toString(), currentFontColor.toString(), publicSwitchValue);
-                    if(publicSwitchValue){
+                    db.setUserPref(currentBGColor.toString(),
+                        currentFontColor.toString(), publicSwitchValue);
+                    if (publicSwitchValue) {
                       _saveLocation(user.uid);
                     }
                     _openCustomDialog();
                   },
                   child: Text('Save Preferences',
-                      style: TextStyle(fontSize: 20, color: Colors.grey[100])),
+                      style:
+                          TextStyle(fontSize: 20, color: AppTheme.whiteText)),
                 ),
               ),
             ),
-
             SizedBox(
               height: 100,
             ),
-
-//            Container(
-//              decoration: BoxDecoration(
-//                  color: Colors.green,
-//                  borderRadius: BorderRadius.all(Radius.circular(10)),
-//                  boxShadow: [
-//                    BoxShadow(
-//                        color: Colors.grey[100],
-//                        spreadRadius: 10.0,
-//                        blurRadius: 4.5)
-//                  ]),
-//              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-//              margin: EdgeInsets.symmetric(horizontal: 32),
-//              child: Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                children: <Widget>[
-//                  Row(
-//                    children: <Widget>[
-//                      Icon(
-//                        Icons.mobile_screen_share,
-//                        color: Colors.lightBlue[900],
-//                      ),
-//                      SizedBox(
-//                        width: 16,
-//                      ),
-//                      Text(
-//                        "ATM Withdraws",
-//                        style: TextStyle(
-//                            fontWeight: FontWeight.w500,
-//                            fontSize: 18,
-//                            color: Colors.grey[700]),
-//                      )
-//                    ],
-//                  ),
-//                  Switch(
-//                    value: true,
-//                    activeColor: Color.fromRGBO(50, 172, 121, 1),
-//                    onChanged: (_) {},
-//                  )
-//                ],
-//              ),
-//            ),
             SizedBox(
               height: 40,
             )

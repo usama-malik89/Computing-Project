@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:bar_card_new/screens/authenticate/sign_in.dart';
-import 'package:bar_card_new/screens/authenticate/register.dart';
+import 'package:bar_card_new/screens/authenticate/SignIn.dart';
+import 'package:bar_card_new/screens/authenticate/Register.dart';
 
 class Authenticate extends StatefulWidget {
   @override
@@ -8,8 +8,8 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
-
   bool showSignIn = true;
+
   void toggleView() {
     setState(() {
       showSignIn = !showSignIn;
@@ -18,10 +18,9 @@ class _AuthenticateState extends State<Authenticate> {
 
   @override
   Widget build(BuildContext context) {
-    if (showSignIn){
+    if (showSignIn) {
       return SignIn(toggleView: toggleView);
-    }
-    else {
+    } else {
       return Register(toggleView: toggleView);
     }
   }
