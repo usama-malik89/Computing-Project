@@ -1,8 +1,19 @@
 import 'package:bar_card_new/custom_drawer/HomeDrawer.dart';
 import 'package:flutter/material.dart';
 
+//This class I outsourced from a tutorial on youtube
+//the code I got from = https://github.com/mitesh77/Best-Flutter-UI-Templates/tree/master/best_flutter_ui_templates/lib/custom_drawer
+//what this class does is creates and handles the animation for the drawer
 class DrawerUserController extends StatefulWidget {
-  const DrawerUserController({
+  final double drawerWidth;
+  final Function(DrawerIndex) onDrawerCall;
+  final Widget screenView;
+  final Function(bool) drawerIsOpen;
+  final AnimatedIconData animatedIconData;
+  final Widget menuView;
+  final DrawerIndex screenIndex;
+
+  DrawerUserController({
     Key key,
     this.drawerWidth = 250,
     this.onDrawerCall,
@@ -13,14 +24,6 @@ class DrawerUserController extends StatefulWidget {
     this.screenIndex,
   }) : super(key: key);
 
-  final double drawerWidth;
-  final Function(DrawerIndex) onDrawerCall;
-  final Widget screenView;
-  final Function(bool) drawerIsOpen;
-  final AnimatedIconData animatedIconData;
-  final Widget menuView;
-  final DrawerIndex screenIndex;
-
   @override
   _DrawerUserControllerState createState() => _DrawerUserControllerState();
 }
@@ -28,7 +31,9 @@ class DrawerUserController extends StatefulWidget {
 class _DrawerUserControllerState extends State<DrawerUserController>
     with TickerProviderStateMixin {
   ScrollController scrollController;
+
   AnimationController iconAnimationController;
+
   AnimationController animationController;
 
   double scrolloffset = 0.0;
@@ -36,15 +41,25 @@ class _DrawerUserControllerState extends State<DrawerUserController>
   @override
   void initState() {
     animationController = AnimationController(
-        duration: const Duration(milliseconds: 2000), vsync: this);
+      duration: const Duration(milliseconds: 2000),
+      vsync: this,
+    );
+
     iconAnimationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 0));
+      vsync: this,
+      duration: const Duration(milliseconds: 0),
+    );
+
     iconAnimationController
-      ..animateTo(1.0,
-          duration: const Duration(milliseconds: 0),
-          curve: Curves.fastOutSlowIn);
+      ..animateTo(
+        1.0,
+        duration: const Duration(milliseconds: 0),
+        curve: Curves.fastOutSlowIn,
+      );
+
     scrollController =
         ScrollController(initialScrollOffset: widget.drawerWidth);
+
     scrollController
       ..addListener(() {
         if (scrollController.offset <= 0) {
@@ -79,6 +94,7 @@ class _DrawerUserControllerState extends State<DrawerUserController>
               curve: Curves.fastOutSlowIn);
         }
       });
+
     WidgetsBinding.instance.addPostFrameCallback((_) => getInitState());
     super.initState();
   }

@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:bar_card_new/AppTheme.dart';
 
+//Class to create the logic and UI for the SplashScreen
 class SplashScreen extends StatefulWidget {
-  final dynamic navigateAfterSeconds;
+
+  //variable to specify where to navigate to after
+  final dynamic navigateTo;
 
   SplashScreen({
-    this.navigateAfterSeconds,
+    this.navigateTo,
   });
 
   @override
@@ -15,15 +18,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+  //initState always runs before building the widget, so initialization and data retrieval can take place before drawing UI to the screen
+  //in this case it is used to specify how long the splashscreen should be shown
   @override
   void initState() {
     super.initState();
     Timer(
         Duration(seconds: 4),
         () => Navigator.of(context).pushReplacement(new MaterialPageRoute(
-            builder: (BuildContext context) => widget.navigateAfterSeconds)));
+            builder: (BuildContext context) => widget.navigateTo)));
   }
 
+  //the build function draws the UI to the screen
   @override
   Widget build(BuildContext context) {
     return Scaffold(

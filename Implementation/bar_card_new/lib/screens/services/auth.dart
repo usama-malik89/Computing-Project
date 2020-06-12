@@ -2,10 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bar_card_new/models/User.dart';
 import 'package:bar_card_new/screens/services/Database.dart';
 
+//class for handling authentication methods, mostly provided by FireBaseAuth package
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // create user object
+  //create the user object
   User _userFromFBUser(FirebaseUser user) {
     return user != null ? User(uid: user.uid, email: user.email) : null;
   }
@@ -15,7 +16,7 @@ class AuthService {
     return _auth.onAuthStateChanged.map(_userFromFBUser);
   }
 
-  //email signup
+  //Function to register with email
   Future regEmail(
       String email, String password, String fName, String sName) async {
     try {
@@ -23,7 +24,7 @@ class AuthService {
           email: email, password: password);
       FirebaseUser user = result.user;
 
-      //create new doucment in database for user
+      //create a new document in database for user
       await DatabaseService(uid: user.uid).updateUserData(
           fName, sName, email, false, "Color(0xff233c67)", "Color(0xfff4f4f4)");
 
@@ -34,7 +35,7 @@ class AuthService {
     }
   }
 
-  //email signing
+  //function to sign in with email
   Future signInEmail(String email, String password) async {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
@@ -50,27 +51,12 @@ class AuthService {
     }
   }
 
-  //forgot password
-
+  //function to send a reset password email if the password is forgotten
   Future resetPassword(String email) async {
     await _auth.sendPasswordResetEmail(email: email);
   }
 
-  //change password
-  void _changePassword(String password) async {
-    //Create an instance of the current user.
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
-
-    //Pass in the password to updatePassword.
-    user.updatePassword(password).then((_) {
-      print("Succesfull changed password");
-    }).catchError((error) {
-      print("Password can't be changed" + error.toString());
-      //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
-    });
-  }
-
-  //sign out
+  //Function to sign out the logged in user
   Future signOut() async {
     try {
       return await _auth.signOut();

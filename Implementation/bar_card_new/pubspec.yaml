@@ -33,14 +33,13 @@ dependencies:
   introduction_screen: ^1.0.8
   location: ^3.0.2
   url_launcher: ^5.4.5
-  #geoflutterfire: ^2.1.0
   geo_firestore: ^0.0.1
-  geopoint: ^0.7.1
-  splashscreen: ^1.2.0
+  geocoder: ^0.2.1
   flutter_spinkit: ^4.1.2+1
   permission_handler: ^5.0.0+hotfix.5
   flutter_sticky_header: ^0.4.2
   progress_button: ^0.0.2
+
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +60,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
   - assets/1.png
+  - assets/2.png
+  - assets/3.png
   - assets/appIcon2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

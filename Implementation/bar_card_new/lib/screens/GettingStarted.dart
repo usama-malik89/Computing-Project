@@ -1,29 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'authenticate/Authenticate.dart';
 
+//Class to create the logic and UI for the welcome screen when starting the app
 class WelcomeScreen extends StatefulWidget {
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  //global key to track the intro screens state
   final introKey = GlobalKey<IntroductionScreenState>();
 
-  void _onIntroEnd(context) {
+  //function that gets run at the end of the intro screen that takes the user to the login page
+  void onIntroEnd(context) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => Authenticate()),
     );
   }
 
-  Widget _buildImage(String assetName) {
+  //function to make adding images on the screen easier by just taking in the image name
+  Widget buildImage(String assetName) {
     return Align(
       child: Image.asset('assets/$assetName.png', width: 250.0),
       alignment: Alignment.bottomCenter,
     );
   }
 
+  //the build function draws the UI to the screen
   @override
   Widget build(BuildContext context) {
     const bodyStyle = TextStyle(fontSize: 19.0);
@@ -35,65 +39,41 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       imagePadding: EdgeInsets.zero,
     );
 
+
+    //Returns the IntroductionScreen package that creates nice looking cards that are horizontally scrollable
     return IntroductionScreen(
       key: introKey,
       pages: [
+        //list of all the introduction cards
         PageViewModel(
           title: "Welcome to BarCard!",
           body:
               "We provide you with E-Business card with your contact details, so you can simply share it with a quick scan.",
-          image: _buildImage('1'),
+          image: buildImage('1'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Learn as you go",
+          title: "QR Code Scanning",
           body:
-              "Download the Stockpile app and master the market with our mini-lesson.",
-          image: _buildImage('1'),
+              "Simply scan a cards QR code to add them to your list!",
+          image: buildImage('2'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Kids and teens",
+          title: "Local Networking",
           body:
-              "Kids and teens can track their stocks 24/7 and place trades that you approve.",
-          image: _buildImage('1'),
+              "View other cards in your area, and meet new people!",
+          image: buildImage('3'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Another title page",
-          body: "Another beautiful body text for this example onboarding",
-          image: _buildImage('1'),
-          footer: RaisedButton(
-            onPressed: () {
-              introKey.currentState?.animateScroll(0);
-            },
-            child: const Text(
-              'FooButton',
-              style: TextStyle(color: Colors.white),
-            ),
-            color: Colors.lightBlue,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-          ),
-          decoration: pageDecoration,
-        ),
-        PageViewModel(
-          title: "Title of last page",
-          bodyWidget: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text("Click on ", style: bodyStyle),
-              Icon(Icons.edit),
-              Text(" to edit a post", style: bodyStyle),
-            ],
-          ),
-          image: _buildImage('img1'),
+          title: "Let's get started",
+          image: buildImage('appIcon2'),
+          body: "Click Done To Login or Register!",
           decoration: pageDecoration,
         ),
       ],
-      onDone: () => _onIntroEnd(context),
-      //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
+      onDone: () => onIntroEnd(context),
       showSkipButton: true,
       skipFlex: 0,
       nextFlex: 0,

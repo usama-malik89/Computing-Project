@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//This class contains all the necessary app Theme colours for easy modification
 class AppTheme {
   AppTheme._();
 
@@ -19,4 +20,11 @@ class AppTheme {
   static const Color darkerText = Color(0xFF17262A);
   static const Color lightText = Color(0xFF4A6572);
   static const Color whiteText = Color(0xFFFEFEFE);
+
+  static const Color appBarBG = Colors.white;
+  static const Color appBarText = Color(0xFF253840);
+
+  static const Color tabBG = Color(0xFFFEFEFE);
+  static const Color tabUnselected = Color(0xFF213333);
+  static const Color tabSelected = Color(0xFF00B6F0);
 }

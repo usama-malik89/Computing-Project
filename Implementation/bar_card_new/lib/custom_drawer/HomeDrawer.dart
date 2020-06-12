@@ -4,17 +4,22 @@ import 'package:provider/provider.dart';
 import 'package:bar_card_new/models/User.dart';
 import 'package:bar_card_new/screens/services/Database.dart';
 
+//This class I outsourced from a tutorial on youtube
+//the code I got from = https://github.com/mitesh77/Best-Flutter-UI-Templates/tree/master/best_flutter_ui_templates/lib/custom_drawer
+//what this class does is creates the UI for the custom drawer
+//This has bee slightly modified to fit my need
 class HomeDrawer extends StatefulWidget {
-  const HomeDrawer(
+  final AnimationController iconAnimationController;
+  final DrawerIndex screenIndex;
+  final Function(DrawerIndex) callBackIndex;
+
+  HomeDrawer(
       {Key key,
       this.screenIndex,
       this.iconAnimationController,
       this.callBackIndex})
       : super(key: key);
 
-  final AnimationController iconAnimationController;
-  final DrawerIndex screenIndex;
-  final Function(DrawerIndex) callBackIndex;
 
   @override
   _HomeDrawerState createState() => _HomeDrawerState();
@@ -41,28 +46,12 @@ class _HomeDrawerState extends State<HomeDrawer> {
         icon: Icon(Icons.home),
       ),
       DrawerList(
-        index: DrawerIndex.Help,
-        labelName: 'Help',
-        isAssetsImage: true,
-        imageName: 'assets/images/supportIcon.png',
+        index: DrawerIndex.ACCOUNT,
+        labelName: 'Account',
+        icon: Icon(Icons.person),
       ),
       DrawerList(
-        index: DrawerIndex.FeedBack,
-        labelName: 'FeedBack',
-        icon: Icon(Icons.help),
-      ),
-      DrawerList(
-        index: DrawerIndex.Invite,
-        labelName: 'Invite Friend',
-        icon: Icon(Icons.group),
-      ),
-      DrawerList(
-        index: DrawerIndex.Share,
-        labelName: 'Rate the app',
-        icon: Icon(Icons.share),
-      ),
-      DrawerList(
-        index: DrawerIndex.About,
+        index: DrawerIndex.ABOUT,
         labelName: 'About Us',
         icon: Icon(Icons.info),
       ),
@@ -190,17 +179,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   Container(
                     width: 6.0,
                     height: 46.0,
-                    // decoration: BoxDecoration(
-                    //   color: widget.screenIndex == listData.index
-                    //       ? Colors.blue
-                    //       : Colors.transparent,
-                    //   borderRadius: new BorderRadius.only(
-                    //     topLeft: Radius.circular(0),
-                    //     topRight: Radius.circular(16),
-                    //     bottomLeft: Radius.circular(0),
-                    //     bottomRight: Radius.circular(16),
-                    //   ),
-                    // ),
                   ),
                   const Padding(
                     padding: EdgeInsets.all(4.0),
@@ -279,15 +257,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
   }
 }
 
-enum DrawerIndex {
-  HOME,
-  FeedBack,
-  Help,
-  Share,
-  About,
-  Invite,
-  Testing,
-}
+enum DrawerIndex { HOME, ACCOUNT, ABOUT }
 
 class DrawerList {
   DrawerList({
